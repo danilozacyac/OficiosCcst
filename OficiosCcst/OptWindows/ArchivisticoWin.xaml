@@ -1,0 +1,64 @@
+﻿<telerik:RadWindow
+    x:Class="OficiosCcst.OptWindows.ArchivisticoWin"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+    Width="800"
+    Height="750"
+    Header="Clasificación General Archivística"
+    Loaded="RadWindow_Loaded"
+    WindowStartupLocation="CenterScreen">
+
+    <telerik:RadWindow.Resources>
+        <HierarchicalDataTemplate x:Key="ObrasChildTemplate" ItemsSource="{Binding Child}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Descripcion}" TextWrapping="Wrap" />
+            </StackPanel>
+        </HierarchicalDataTemplate>
+
+        <HierarchicalDataTemplate
+            x:Key="CategoryTemplate"
+            ItemTemplate="{StaticResource ObrasChildTemplate}"
+            ItemsSource="{Binding Child}">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock
+                    Margin="2"
+                    VerticalAlignment="Center"
+                    Foreground="{telerik:Windows8Resource ResourceKey=MarkerBrush}"
+                    Text="{Binding Descripcion}" />
+            </StackPanel>
+        </HierarchicalDataTemplate>
+        <Style TargetType="telerik:RadTreeViewItem">
+            <Setter Property="IsExpanded" Value="True" />
+        </Style>
+    </telerik:RadWindow.Resources>
+
+    <Grid>
+        <telerik:RadTreeView
+            x:Name="TreeArchivistica"
+            Margin="0,45,0,50"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            ItemTemplate="{StaticResource CategoryTemplate}" />
+        <Label
+            Margin="10,10,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Content="Selecciona la categoría pertinente" />
+        <Button
+            x:Name="BtnCancelar"
+            Width="75"
+            Margin="0,0,10,10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Content="Cancelar" />
+        <Button
+            x:Name="BtnSelect"
+            Width="75"
+            Margin="0,0,91,10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Content="Seleccionar" />
+
+    </Grid>
+</telerik:RadWindow>
